@@ -1,0 +1,105 @@
+{
+    "$defs": {
+        "status_check_runner__checkers__python__PythonChecker__Config": {
+            "properties": {
+                "paths": {
+                    "default": [],
+                    "items": {
+                        "format": "path",
+                        "type": "string"
+                    },
+                    "title": "Paths",
+                    "type": "array"
+                },
+                "tests_path": {
+                    "anyOf": [
+                        {
+                            "format": "path",
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Tests Path"
+                },
+                "pytest_args": {
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "Pytest Args",
+                    "type": "array"
+                }
+            },
+            "title": "Config",
+            "type": "object"
+        },
+        "status_check_runner__checkers__terraform__TerraformChecker__Config": {
+            "properties": {},
+            "title": "Config",
+            "type": "object"
+        },
+        "status_check_runner__checkers__typescript__TypeScriptChecker__Config": {
+            "properties": {
+                "paths": {
+                    "default": [],
+                    "items": {
+                        "format": "path",
+                        "type": "string"
+                    },
+                    "title": "Paths",
+                    "type": "array"
+                }
+            },
+            "title": "Config",
+            "type": "object"
+        }
+    },
+    "properties": {
+        "root_path": {
+            "format": "path",
+            "title": "Root Path",
+            "type": "string"
+        },
+        "python": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/status_check_runner__checkers__python__PythonChecker__Config"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        },
+        "terraform": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/status_check_runner__checkers__terraform__TerraformChecker__Config"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        },
+        "typescript": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/status_check_runner__checkers__typescript__TypeScriptChecker__Config"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "default": null
+        }
+    },
+    "required": [
+        "root_path"
+    ],
+    "title": "Config",
+    "type": "object"
+}
