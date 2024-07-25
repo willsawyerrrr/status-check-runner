@@ -5,6 +5,7 @@ from typing import Optional
 from .checkers import Check
 from .checkers.default import DefaultChecker
 from .checkers.python import PythonChecker
+from .checkers.terraform import TerraformChecker
 from .checkers.typescript import TypeScriptChecker
 from .devcontainer import execute_check, start_devcontainer
 
@@ -12,6 +13,7 @@ from .devcontainer import execute_check, start_devcontainer
 class Config(DefaultChecker.Config):
     root_path: Path
     python: Optional[PythonChecker.Config] = None
+    terraform: Optional[TerraformChecker.Config] = None
     typescript: Optional[TypeScriptChecker.Config] = None
 
 
@@ -23,6 +25,8 @@ def main() -> int:
 
     if config.python:
         checks.extend(PythonChecker.get_checks(config.root_path, config.python))
+    if config.terraform:
+        checks.extend(TerraformChecker.get_checks(config.root_path, config.terraform))
     if config.typescript:
         checks.extend(TypeScriptChecker.get_checks(config.root_path, config.typescript))
 
