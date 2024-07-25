@@ -17,6 +17,11 @@ class Config(DefaultChecker.Config):
     typescript: Optional[TypeScriptChecker.Config] = None
 
 
+def update_config_json_schema():
+    with open("config-schema.json", "w", encoding="utf-8") as file:
+        json.dump(Config.model_json_schema(), file, indent=4)
+
+
 def main() -> int:
     with open("config.json", "r", encoding="utf-8") as file:
         config = Config.model_validate(json.loads(file.read()))

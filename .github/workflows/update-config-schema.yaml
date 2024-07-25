@@ -1,0 +1,37 @@
+name: Update configuration JSON schema
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-config-schema:
+    name: Update configuration JSON schema
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: pip install poetry
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+          cache: poetry
+      - run: poetry install
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: |
+          source $(poetry env info --path)/bin/activate
+          python -m status_check_runner --update-config
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          branch: main
+          commit_message: "chore: Update configuration JSON schema"
+          file_pattern: config-schema.json
