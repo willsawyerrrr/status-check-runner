@@ -1,0 +1,25 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "status-check-runner"
+version = "0.1.0"
+description = "Status check runner"
+authors = ["William Sawyer <william@situ.com.au>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+pydantic = "^2.8.2"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "*"
+ruff = "*"
+
+[tool.poetry.group.test.dependencies]
+pytest = "*"
+
+[tool.ruff]
+line-length = 100

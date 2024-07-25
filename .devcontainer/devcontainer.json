@@ -1,0 +1,8 @@
+{
+    "name": "Status Checks",
+    "image": "ghcr.io/situdevelopment/devcontainer-node-20-python-3.12",
+
+    "features": {
+        "ghcr.io/devcontainers-contrib/features/devcontainers-cli:1": {}
+    }
+}
