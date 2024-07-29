@@ -25,7 +25,7 @@ class PythonChecker(Checker):
         if config.tests_path:
             checks.append(
                 Check(
-                    name=f"Pytest Tests ({path})",
+                    name=f"Pytest Tests ({config.tests_path})",
                     command=f"pytest {" ".join(config.pytest_args)} {config.tests_path}",
                 )
             )
