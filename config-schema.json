@@ -58,11 +58,6 @@
         }
     },
     "properties": {
-        "root_path": {
-            "format": "path",
-            "title": "Root Path",
-            "type": "string"
-        },
         "python": {
             "anyOf": [
                 {
@@ -97,9 +92,6 @@
             "default": null
         }
     },
-    "required": [
-        "root_path"
-    ],
     "title": "Config",
     "type": "object"
 }
