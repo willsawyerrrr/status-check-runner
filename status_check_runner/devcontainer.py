@@ -1,11 +1,12 @@
 import json
 import subprocess
 import sys
+from pathlib import Path
 
 from .checkers import Check
 
 
-def start_devcontainer() -> str:
+def start() -> str:
     devcontainer = subprocess.run(
         "devcontainer up --workspace-folder .".split(),
         capture_output=True,
@@ -18,6 +19,16 @@ def start_devcontainer() -> str:
     assert devcontainer_output["outcome"] == "success"
 
     return devcontainer_output["containerId"]
+
+
+def get_root_path(devcontainer_id: str) -> Path:
+    jq_command = '.[].Mounts[] | select(.Type == "bind") | .Destination'
+    root_path = subprocess.check_output(
+        f"docker inspect {devcontainer_id} | jq '{jq_command}'",
+        shell=True,
+        text=True,
+    )
+    return Path(root_path.strip()[1:-1])
 
 
 def execute_check(devcontainer_id: str, check: Check) -> str:
