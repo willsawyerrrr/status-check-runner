@@ -1,0 +1,52 @@
+name: Publish to PyPI
+
+on:
+  push:
+    branches: main
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      is-greater: ${{ steps.check-version.outputs.local_version_is_higher }}
+      version: ${{ steps.check-version.outputs.local_version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: check-version
+        uses: mpm-tu-berlin/pyproject-check-version-poetry@v3
+
+  release-to-github:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.RELEASE_PAT }}
+    if: ${{ fromJson(needs.check-version.outputs.is-greater) }}
+    needs: check-version
+    steps:
+      - uses: actions/checkout@v4
+      - run: gh release create --generate-notes --target main "v${{ needs.check-version.outputs.version }}"
+
+  publish-to-pypi:
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/status-check-runner
+    if: ${{ fromJson(needs.check-version.outputs.is-greater) }}
+    needs: check-version
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: pipx install poetry
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "poetry"
+
+      - run: poetry install
+      - run: poetry build
+
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@v1.9.0
