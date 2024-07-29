@@ -29,6 +29,7 @@ jobs:
       - run: |
           source $(poetry env info --path)/bin/activate
           python -m status_check_runner --update-config
+          npx prettier --write config-schema.json
 
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
