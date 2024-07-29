@@ -11,11 +11,6 @@ class TerraformChecker(Checker):
     def get_checks(config: Config) -> list[Check]:
         checks: list[Check] = []
 
-        checks.append(
-            Check(
-                name="Terraform Formatting",
-                command="terraform fmt -check .",
-            )
-        )
+        checks.append(Check(name="Terraform Formatting", command="terraform fmt -check ."))
 
         return checks

@@ -18,24 +18,9 @@ class PythonChecker(Checker):
 
         paths = " ".join(map(str, config.paths))
 
-        checks.append(
-            Check(
-                name="Ruff Linting",
-                command=f"ruff check {paths}",
-            )
-        )
-        checks.append(
-            Check(
-                name="Ruff Formatting",
-                command=f"ruff format --check {paths}",
-            )
-        )
-        checks.append(
-            Check(
-                name="MyPy Type Checking",
-                command=f"mypy {paths}",
-            )
-        )
+        checks.append(Check(name="Ruff Linting", command=f"ruff check {paths}"))
+        checks.append(Check(name="Ruff Formatting", command=f"ruff format --check {paths}"))
+        checks.append(Check(name="MyPy Type Checking", command=f"mypy {paths}"))
 
         if config.tests_path:
             checks.append(
