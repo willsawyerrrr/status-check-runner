@@ -10,14 +10,14 @@ class TypeScriptChecker(Checker):
         paths: list[Path] = []
 
     @staticmethod
-    def get_checks(root_path: Path, config: Config) -> list[Check]:
+    def get_checks(config: Config) -> list[Check]:
         checks: list[Check] = []
 
         for path in config.paths:
             checks.append(
                 Check(
                     name=f"TypeScript Compiler ({path})",
-                    command=f"npx tsc --noEmit --project {root_path / path}",
+                    command=f"npx tsc --noEmit --project {path}",
                 )
             )
 

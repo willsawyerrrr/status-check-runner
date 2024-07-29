@@ -13,26 +13,26 @@ class PythonChecker(Checker):
         pytest_args: list[str] = []
 
     @staticmethod
-    def get_checks(root_path: Path, config: Config) -> list[Check]:
+    def get_checks(config: Config) -> list[Check]:
         checks: list[Check] = []
 
         for path in config.paths:
             checks.append(
                 Check(
                     name=f"Ruff Linting ({path})",
-                    command=f"ruff check {root_path / path}",
+                    command=f"ruff check {path}",
                 )
             )
             checks.append(
                 Check(
                     name=f"Ruff Formatting ({path})",
-                    command=f"ruff format --check {root_path / path}",
+                    command=f"ruff format --check {path}",
                 )
             )
             checks.append(
                 Check(
                     name=f"MyPy Type Checking ({path})",
-                    command=f"mypy {root_path / path}",
+                    command=f"mypy {path}",
                 )
             )
 
@@ -40,7 +40,7 @@ class PythonChecker(Checker):
             checks.append(
                 Check(
                     name=f"Pytest Tests ({path})",
-                    command=f"pytest {" ".join(config.pytest_args)} {root_path / config.tests_path}",
+                    command=f"pytest {" ".join(config.pytest_args)} {config.tests_path}",
                 )
             )
 
