@@ -21,7 +21,7 @@ def update_config_json_schema():
 
 
 def main() -> int:
-    with open("config.json", "r", encoding="utf-8") as file:
+    with open("status-checks.json", "r", encoding="utf-8") as file:
         config = Config.model_validate(json.loads(file.read()))
 
     checks: list[Check] = DefaultChecker.get_checks(config)
