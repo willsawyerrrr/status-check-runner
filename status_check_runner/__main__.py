@@ -1,7 +1,8 @@
 import sys
 
-from . import main, update_config_json_schema
+from . import main
 from .argparse import parser
+from .config import update_config_json_schema
 
 if __name__ == "__main__":
     args = parser.parse_args(sys.argv[1:])  # skip first argument (path to this file)
