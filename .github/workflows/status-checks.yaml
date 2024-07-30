@@ -1,0 +1,21 @@
+name: Run Status Checks
+
+on: pull_request
+
+jobs:
+  status-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: pip install poetry
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+          cache: poetry
+      - run: poetry install
+
+      - name: Run Status Checks
+        uses: devcontainers/ci@v0.3.1900000349
+        with:
+          runCmd: python -m status_check_runner
