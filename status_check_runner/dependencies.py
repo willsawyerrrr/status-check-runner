@@ -1,4 +1,3 @@
-import json
 from os import getenv
 
 from .checkers import Check
@@ -6,15 +5,14 @@ from .checkers.default import DefaultChecker
 from .checkers.python import PythonChecker
 from .checkers.terraform import TerraformChecker
 from .checkers.typescript import TypeScriptChecker
-from .config import Config
+from .config import get_config
 from .reporters import Reporter
 from .reporters.console import ConsoleReporter
 from .reporters.github_actions import GitHubActionsReporter
 
 
 def resolve_checks() -> list[Check]:
-    with open("status-checks.json", "r", encoding="utf-8") as file:
-        config = Config.model_validate(json.loads(file.read()))
+    config = get_config()
 
     checks: list[Check] = DefaultChecker.get_checks(config)
 
