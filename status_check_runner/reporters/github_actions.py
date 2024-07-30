@@ -1,6 +1,6 @@
 from typing import Iterable
 
-from actions_toolkit import core
+from actions_toolkit import core  # type: ignore
 
 from ..execute import Result
 from . import Reporter
