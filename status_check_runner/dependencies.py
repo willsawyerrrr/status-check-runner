@@ -1,4 +1,5 @@
 import json
+from os import getenv
 
 from .checkers import Check
 from .checkers.default import DefaultChecker
@@ -8,6 +9,7 @@ from .checkers.typescript import TypeScriptChecker
 from .config import Config
 from .reporters import Reporter
 from .reporters.console import ConsoleReporter
+from .reporters.github_actions import GitHubActionsReporter
 
 
 def resolve_checks() -> list[Check]:
@@ -27,4 +29,7 @@ def resolve_checks() -> list[Check]:
 
 
 def resolve_reporter() -> Reporter:
+    if getenv("GITHUB_ACTIONS"):
+        return GitHubActionsReporter()
+
     return ConsoleReporter()
