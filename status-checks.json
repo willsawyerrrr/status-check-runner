@@ -1,0 +1,7 @@
+{
+    "$schema": "./config-schema.json",
+    "python": {
+        "paths": ["status_check_runner", "tests"],
+        "tests_path": "tests"
+    }
+}
