@@ -19,7 +19,7 @@ jobs:
   release-to-github:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.RELEASE_PAT }}
+      GH_TOKEN: ${{ secrets.PAT }}
     if: ${{ fromJson(needs.check-version.outputs.is-greater) }}
     needs: check-version
     steps:
