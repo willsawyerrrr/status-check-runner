@@ -25,14 +25,6 @@
                             ],
                             "default": null,
                             "title": "Tests Path"
-                        },
-                        "pytest_args": {
-                            "default": [],
-                            "items": {
-                                "type": "string"
-                            },
-                            "title": "Pytest Args",
-                            "type": "array"
                         }
                     },
                     "title": "Config",
