@@ -19,3 +19,7 @@ jobs:
         uses: devcontainers/ci@v0.3.1900000349
         with:
           runCmd: python -m status_check_runner
+          # Use `inheritEnv: true` instead of explicitly setting the environment once the below
+          # commit is included in a release (currently seems to be planned for v0.3.1900000350)
+          # https://github.com/devcontainers/ci/commit/4dc5cb43f319c991f9531be34d682a8ffa8bfb4c
+          env: GITHUB_ACTIONS=true
