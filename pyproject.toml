@@ -12,7 +12,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 
-github-action-utils = "^1.1.0"
+actions-toolkit = "^0.1.15"
 pydantic = "^2.8.2"
 
 [tool.poetry.group.dev.dependencies]
