@@ -6,6 +6,8 @@ from .checkers.python import PythonChecker
 from .checkers.terraform import TerraformChecker
 from .checkers.typescript import TypeScriptChecker
 from .config import Config
+from .reporters import Reporter
+from .reporters.console import ConsoleReporter
 
 
 def resolve_checks() -> list[Check]:
@@ -22,3 +24,7 @@ def resolve_checks() -> list[Check]:
         checks.extend(TypeScriptChecker.get_checks(config.typescript))
 
     return checks
+
+
+def resolve_reporter() -> Reporter:
+    return ConsoleReporter()
