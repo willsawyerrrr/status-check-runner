@@ -20,7 +20,7 @@ class GitHubActionsReporter(Reporter):
 
         core.start_group(f"{result.check.name} failed ({result.status})")
 
-        core.warning(result.stdout)
+        core.error(result.stdout)
 
         if result.stderr:
             core.error(result.stderr)
