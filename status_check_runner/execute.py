@@ -6,9 +6,7 @@ from .checkers import Check
 
 def execute_check(check: Check) -> str:
     try:
-        output = subprocess.check_output(
-            f"{check.command}".split(), stderr=subprocess.STDOUT, text=True
-        )
+        output = subprocess.check_output(check.command.split(), stderr=subprocess.STDOUT, text=True)
         print(f"{check.name} succeeded!")
         return output
     except subprocess.CalledProcessError as exc:
