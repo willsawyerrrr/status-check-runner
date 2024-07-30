@@ -6,7 +6,7 @@ from .checkers.default import DefaultChecker
 from .checkers.python import PythonChecker
 from .checkers.terraform import TerraformChecker
 from .checkers.typescript import TypeScriptChecker
-from .execute import execute_check
+from .execute import Result, execute_check
 
 
 class Config(DefaultChecker.Config):
@@ -33,7 +33,7 @@ def main() -> int:
     if config.typescript:
         checks.extend(TypeScriptChecker.get_checks(config.typescript))
 
-    results: list[str] = []
+    results: list[Result] = []
     for check in checks:
         results.append(execute_check(check))
 
