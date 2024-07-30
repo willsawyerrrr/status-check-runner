@@ -24,3 +24,7 @@ pytest = "*"
 
 [tool.ruff]
 line-length = 100
+
+[tool.status-check-runner.python]
+paths = ["status_check_runner", "tests"]
+tests_path = "tests"
