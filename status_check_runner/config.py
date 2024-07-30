@@ -1,7 +1,7 @@
 import json
 from typing import Any, Optional
 
-import jsonref
+import jsonref  # type: ignore
 import tomllib
 
 from .checkers.default import DefaultChecker
