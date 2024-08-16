@@ -1,0 +1,8 @@
+{
+    "$schema": "https://raw.githubusercontent.com/willsawyerrrr/status-check-runner/main/config-schema.json",
+
+    "python": {
+        "paths": ["status_check_runner", "tests"],
+        "tests_path": "tests"
+    }
+}
