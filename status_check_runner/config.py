@@ -1,8 +1,6 @@
 import json
 from typing import Optional
 
-import tomllib
-
 from .checkers.default import DefaultChecker
 from .checkers.python import PythonChecker
 from .checkers.terraform import TerraformChecker
@@ -16,10 +14,8 @@ class Config(DefaultChecker.Config):
 
 
 def get_config() -> Config:
-    with open("pyproject.toml", "rb") as file:
-        pyproject_toml = tomllib.load(file)
-
-    return Config.model_validate(pyproject_toml.get("tool", {}).get("status-check-runner", {}))
+    with open("status-checks.json", "r", encoding="utf-8") as file:
+        return Config.model_validate(json.loads(file.read()))
 
 
 def update_config_json_schema():
